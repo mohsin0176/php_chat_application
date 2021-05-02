@@ -70,7 +70,193 @@ class ChatUser
    {
    	return $this->user_status;
    }
+   function setUserCreatedOn($user_created_on)
+   {
+   	$this->user_created_on=$user_created_on;
+   }
+   function getUserCreatedOn()
+   {
+   	return $this->user_created_on;
+   }
 
+   function setUserVerificationCode($user_verification_code)
+   {
+   	$this->user_verification_code=$user_verification_code;
+   }
+   function getUserVerificationCode()
+   {
+   	return $this->user_verification_code;
+   }
+   function setUserLoginStatus($user_login_status)
+   {
+   	$this->user_login_status=$user_login_status;
+   }
+   function getUserLoginStatus()
+   {
+   	return $this->user_login_status;
+   }
+
+   function make_avatar($character)
+   {
+   	$path="images/".time().".png";
+   	$image=imagecreate(200,200);
+   	$red=rand(0,255);
+   	$green=rand(0,255);
+   	$blue=rand(0,255);
+   	imagecolorallocate($image, $red, $green, $blue);
+   	$textcolor=imagecolorallocate($image,255,255,255);
+   	$font=dirname(__FILE__).'/font/arial.ttf';
+   	imagettftext($image,100,0,55,150, $textcolor,$font,$character);
+   	imagepng($image,$path);
+   	imagedestroy($image);
+   	return $path;
+   }
+
+   function get_user_data_by_email()
+   {
+   	$query="
+   	SELECT *FROM chat_user_table WHERE user_email=:user_email";
+   	$statement=$this->connect->prepare($query);
+   	$statement->bindParam(':user_email',$this->user_email);
+   	if ($statement) 
+   	{
+   		$user_data=$statement->fech(PDO::FETCH_ASSOC);
+   	}
+   	return $user_data;
+
+   }
+
+   function save_data()
+   {
+   	$query="INSERT INTO chat_user_table (user_name,user_email,user_password,user_profile,user_status,user_created_on,user_verification_code)VALUES(:user_name,:user_email,:user_password,:user_profile,:user_status,:user_created_on,:user_verification_code)";
+
+   	$statement=$this->connect->prepare($query);
+   	$statement->bindParam(':user_name',$this->user_name);
+   	$statement->bindParam(':user_email',$this->user_email);
+   	$statement->bindParam(':user_password',$this->user_password);
+   	$statement->bindParam(':user_profile',$this->user_profile);
+   	$statement->bindParam(':user_status',$this->user_status);
+   	$statement->bindParam(':user_created_on',$this->user_created_on);
+   	$statement->bindParam(':user_verification_code',$this->user_verification_code);
+   	if ($statement->execute()) 
+   	{
+   		return true;
+   	}
+   	else
+   	{
+   		return false;
+   	}
+   
+   }
+
+   function is_valid_email_verification_code()
+   {
+   	$query="
+   	SELECT *FROM chat_user_table WHERE user_verification_code=:user_verification_code";
+   	$statement=$this->connect->prepare($query);
+   	$statement->bindParam(':user_verification_code',$this->user_verification_code);
+   	$statement->execute();
+
+   	if ($statement->rowCount()>0) 
+   	{
+   		return true;
+   	}
+   	else
+   	{
+   		return false;
+   	}
+  }
+  function enable_user_account()
+  {
+  	$query="UPDATE chat_user_table SET user_status=:user_status WHERE user_verification_code=:user_verification_code";
+  	$statement=$this->connect->prepare($query);
+  	$statement->bindParam(':user_status',$this->user_status);
+  	$statement->bindParam(':user_verification_code',$this->user_verification_code);
+  	if ($statement->execute()) 
+  	{
+  		return true;
+  	}
+  	else
+  	{
+  		return false;
+  	}
+  }
+  function update_user_login_data()
+  {
+  	$query="UPDATE chat_user_table SET user_login_status=:user_login_status WHERE user_id=:user_id";
+  	$statement=$this->connect->prepare($query);
+  	$statement->bindParam(':user_login_status',$this->user_login_status);
+  	$statement->bindParam(':user_id',$this->user_id);
+  	if ($statement->execute()) 
+  	{
+  		return true;
+  	}
+  	else
+  	{
+  		return false;
+  	}
+  }
+
+  function get_user_data_by_id()
+  {
+  	$query="SELECT *FROM chat_user_table WHERE user_id=:user_id";
+  	$statement=$this->connect->prepare($query);
+  	$statement->bindParam(':user_id',$this->user_id);
+
+  	try
+  	{
+  		if ($statement->execute()) 
+  		{
+  			$user_data=$statement->fetch(PDO::FETCH_ASSOC);
+  		}
+  		else
+  		{
+  			$user_data=array();
+  		}
+  	}
+  	catch(Exception $error)
+  	{
+  		echo $error->getMessage();
+  	}
+  	return $user_data;
+  }
+  function upload_image($user_profile)
+  {
+  	$extension=explode('.',$user_profile['name']);
+  	$new_name=rand().'.'.$extension[1];
+  	$destination='images/'.$new_name;
+  	move_uploaded_file($user_profile['tmp_name'],$destination);
+  	return $destination;
+  }
+
+  function update_data()
+  {
+  	$query="UPDATE chat_user_table SET user_name=:user_name,user_email=:user_email,user_password=:user_password,user_profile=:user_profile WHERE user_id=:user_id";
+
+  	    $statement=$this->connect->prepare($query);
+  	    $statement->bindParam(':user_name',$this->user_name);
+  	    $statement->bindParam(':user_email',$this->user_email);
+  	    $statement->bindParam(':user_password',$this->user_password);
+  	    $statement->bindParam(':user_profile',$this->user_profile);
+  	    $statement->bindParam(':user_id',$this->user_id);
+  	    if ($statement->execute()) 
+  	    {
+  	    	return true;
+  	    }
+  	    else
+  	    {
+  	    	return false;
+  	    }
+  }
+
+  function get_user_all_data()
+  {
+  	$query="SELECT *FROM chat_user_table";
+  	$statement=$this->connect->prepare($query);
+  	$statement->execute();
+  	$data=$statement->fetchAll(PDO::FETCH_ASSOC);
+  	return $data;
+  }
 
 }
 
