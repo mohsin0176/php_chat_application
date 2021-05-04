@@ -10,8 +10,7 @@ if (isset($_POST['login']))
 	require_once('database/ChatUser.php');
 	$user_object=new ChatUser;
 	$user_object->setUserEmail($_POST['user_email']);
-	$user_data=$user_object->get_user_data_email();
-
+	 $user_data = $user_object->get_user_data_by_email();
 	if (is_array($user_data)&&count($user_data)>0) 
 	{
 		if ($user_data['user_status']=='Enable') 

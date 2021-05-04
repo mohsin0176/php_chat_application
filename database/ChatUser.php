@@ -118,9 +118,9 @@ class ChatUser
    	SELECT *FROM chat_user_table WHERE user_email=:user_email";
    	$statement=$this->connect->prepare($query);
    	$statement->bindParam(':user_email',$this->user_email);
-   	if ($statement) 
+   	if($statement->execute())
    	{
-   		$user_data=$statement->fech(PDO::FETCH_ASSOC);
+   		$user_data = $statement->fetch(PDO::FETCH_ASSOC);
    	}
    	return $user_data;
 
