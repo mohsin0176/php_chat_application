@@ -6,7 +6,7 @@
     },
     
     "require": {
-        "phpmailer/phpmailer": "^6.2",
+        "phpmailer/phpmailer": "^6.4",
         "cboden/ratchet": "v0.4"
     }
 }
