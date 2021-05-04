@@ -23,9 +23,9 @@ class ChatUser
    {
    	$this->user_id=$user_id;
    }
-   function getUserId($user_id)	
+   function getUserId()	
    {
-   	$this->user_id=$user_id;
+   	$this->user_id;
    }
    function setUserName($user_name)	
    {
@@ -106,8 +106,8 @@ class ChatUser
    	imagecolorallocate($image, $red, $green, $blue);
    	$textcolor=imagecolorallocate($image,255,255,255);
    	$font=dirname(__FILE__).'/font/arial.ttf';
-   	imagettftext($image,100,0,55,150, $textcolor,$font,$character);
-   	imagepng($image,$path);
+   	imagettftext($image, 100, 0, 55, 150, $textcolor, $font, $character);
+   	 imagepng($image, $path);
    	imagedestroy($image);
    	return $path;
    }
