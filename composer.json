@@ -7,6 +7,7 @@
     
     "require": {
         "phpmailer/phpmailer": "^6.4",
-        "cboden/ratchet": "v0.4"
+        "cboden/ratchet": "v0.4",
+		"hoa/websocket": "^3.17"
     }
 }

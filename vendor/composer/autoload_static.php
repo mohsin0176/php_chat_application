@@ -7,11 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInita2e45bc9ff3813f08e49b2ba2c30b573
 {
     public static $files = array (
+        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '972fda704d680a3a53c68e34e193cb22' => __DIR__ . '/..' . '/react/promise-timer/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '3e76f7f02b41af8cea96018933f6b7e3' => __DIR__ . '/..' . '/hoa/protocol/Wrapper.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '4b7476a768c48566b152323c69f12e6d' => __DIR__ . '/..' . '/hoa/websocket/Socket.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -41,6 +44,17 @@ class ComposerStaticInita2e45bc9ff3813f08e49b2ba2c30b573
         'M' => 
         array (
             'MyApp\\' => 6,
+        ),
+        'H' => 
+        array (
+            'Hoa\\Websocket\\' => 14,
+            'Hoa\\Stream\\' => 11,
+            'Hoa\\Socket\\' => 11,
+            'Hoa\\Protocol\\' => 13,
+            'Hoa\\Http\\' => 9,
+            'Hoa\\Exception\\' => 14,
+            'Hoa\\Event\\' => 10,
+            'Hoa\\Consistency\\' => 16,
         ),
         'G' => 
         array (
@@ -108,6 +122,38 @@ class ComposerStaticInita2e45bc9ff3813f08e49b2ba2c30b573
         'MyApp\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Hoa\\Websocket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/websocket',
+        ),
+        'Hoa\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/stream',
+        ),
+        'Hoa\\Socket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/socket',
+        ),
+        'Hoa\\Protocol\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/protocol',
+        ),
+        'Hoa\\Http\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/http',
+        ),
+        'Hoa\\Exception\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/exception',
+        ),
+        'Hoa\\Event\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/event',
+        ),
+        'Hoa\\Consistency\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hoa/consistency',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
